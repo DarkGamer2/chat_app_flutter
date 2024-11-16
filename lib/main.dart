@@ -14,8 +14,34 @@ class MainApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text("Chat App"),
         ),
-        body: const Center(
-          child: Text("Hello World"),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: "Enter your message",
+                    labelText: "Message",
+                  ),
+                ),
+                const SizedBox(height: 16.0),
+                ElevatedButton(
+                  onPressed: null,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24.0, vertical: 12.0),
+                    textStyle: const TextStyle(fontSize: 16.0),
+                  ),
+                  child: const Text("Send"),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
