@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MessageScreen extends StatelessWidget {
   final List<String> messages;
 
-  const MessageScreen({Key? key, required this.messages}) : super(key: key);
+  const MessageScreen({super.key, required this.messages});
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,11 @@ import 'message_input_screen.dart';
 import 'message_screen.dart';
 
 class BottomTabNavigator extends StatefulWidget {
-  const BottomTabNavigator({super.key});
+  final bool isDarkMode;
+  final Function(bool) onThemeChanged;
+
+  const BottomTabNavigator(
+      {super.key, required this.isDarkMode, required this.onThemeChanged});
 
   @override
   _BottomTabNavigatorState createState() => _BottomTabNavigatorState();
@@ -22,6 +26,7 @@ class _BottomTabNavigatorState extends State<BottomTabNavigator> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: widget.isDarkMode ? ThemeData.dark() : ThemeData.light(),
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
@@ -35,12 +40,19 @@ class _BottomTabNavigatorState extends State<BottomTabNavigator> {
               ],
             ),
           ),
-          body: TabBarView(
-            children: [
-              MessageScreen(messages: _messages),
-              const Settings(),
-              MessageInputScreen(onSendMessage: _addMessage),
-            ],
+          body: Container(
+            color: widget.isDarkMode ? Colors.black : Colors.white,
+            child: TabBarView(
+              children: [
+                MessageScreen(messages: _messages),
+                Settings(
+                  onThemeChanged: widget.onThemeChanged,
+                  isDarkMode: widget.isDarkMode,
+                ),
+                MessageInputScreen(
+                    onSendMessage: _addMessage, isDarkMode: widget.isDarkMode),
+              ],
+            ),
           ),
         ),
       ),

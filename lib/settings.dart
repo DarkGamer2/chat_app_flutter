@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Settings extends StatefulWidget {
-  const Settings({Key? key}) : super(key: key);
+  final Function(bool) onThemeChanged;
+  final bool isDarkMode;
+
+  const Settings(
+      {super.key, required this.onThemeChanged, required this.isDarkMode});
 
   @override
   _SettingsState createState() => _SettingsState();
@@ -14,8 +18,20 @@ class _SettingsState extends State<Settings> {
       appBar: AppBar(
         title: const Text("Settings"),
       ),
-      body: const Center(
-        child: Text("Settings"),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text("Settings"),
+            const Text("Dark Mode"),
+            Switch(
+              value: widget.isDarkMode,
+              onChanged: (value) {
+                widget.onThemeChanged(value);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
